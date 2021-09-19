@@ -39,41 +39,37 @@ public class MessageBusImpl implements MessageBus {
 	@Override
 	public  <T> void subscribeEvent(Class<? extends Event<T>> type, MicroService m) {
 		synchronized (eventLock) {
-			if (!MessagesMap.containsKey(type)) {
+			if (!MessagesMap.containsKey(type)) 
 				MessagesMap.put(type, new Vector<>());
-			}
 		}
 		MessagesMap.get(type).add(m);
 	}
 
 	@Override
 	public void subscribeBroadcast(Class<? extends Broadcast> type, MicroService m) {
-			synchronized (broadcastLock) {
-				if (!MessagesMap.containsKey(type)) {
-					MessagesMap.put(type, new Vector<>());
-				}
-			}
+		synchronized (broadcastLock) {
+			if (!MessagesMap.containsKey(type)) 
+				MessagesMap.put(type, new Vector<>());
+		}
 		MessagesMap.get(type).add(m);
 
 	}
 
 	@Override @SuppressWarnings("unchecked")
 	public <T> void complete(Event<T> e, T result) {
-			futureMap.get(e).resolve(result);
+		futureMap.get(e).resolve(result);
 	}
 	@Override
 	public void sendBroadcast(Broadcast b) {
 		 synchronized (lock) {
-			 Vector<MicroService> tmp=new Vector<>();
-		 	for (int i=0; i<MessagesMap.get(b.getClass()).size(); i++) {
+			Vector<MicroService> tmp=new Vector<>();
+		 	for (int i=0; i<MessagesMap.get(b.getClass()).size(); i++) 
 				tmp.add(MessagesMap.get(b.getClass()).elementAt(i));
-			}
-		 	for (int i=0; i<MessagesMap.get(b.getClass()).size(); i++) {
+			
+		 	for (int i=0; i<MessagesMap.get(b.getClass()).size(); i++) 
 				microServiceMap.get(tmp.elementAt(i)).add(b);
-			}
 			lock.notifyAll();
 		}
-
 	}
 
 
