@@ -31,10 +31,8 @@ public class Ewoks {
         synchronized (alllock) {
 
             for (int i = 0; i < neededEwoks.size(); i++) {
-                if (this.getVectorE().elementAt(neededEwoks.elementAt(i) - 1).getAvailable()){
+                if (this.getVectorE().elementAt(neededEwoks.elementAt(i) - 1).getAvailable())
                     this.getVectorE().elementAt(neededEwoks.elementAt(i) - 1).acquire();
-
-                }
                 else {
                     releaseAll(neededEwoks,i);
                     i=-1;
