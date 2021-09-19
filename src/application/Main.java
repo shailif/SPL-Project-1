@@ -21,9 +21,9 @@ public class Main {
 			Input json = JsonInputReader.getInputFromJson(input);
 
 			Ewoks Evector =  Ewoks.getInstance(); // ewok i will be at i-1
-			for (int i = 1; i <= json.getEwoks(); i++) {
+			for (int i = 1; i <= json.getEwoks(); i++) 
 				Evector.getVectorE().add(new Ewok(i));
-			}
+			
 
 			Thread Leia=new Thread(new LeiaMicroservice(json.getAttacks()));
 			Thread  HanSoloMicroservice= new Thread(new HanSoloMicroservice());
@@ -36,8 +36,8 @@ public class Main {
 			C3POMicroservice.start();
 			R2D2.start();
 			Lando.start();
-            try{
-				Lando.join();
+
+			try{ Lando.join();
 			}catch (InterruptedException e){}
 
 			 Gson gson=new GsonBuilder().setPrettyPrinting().create();
