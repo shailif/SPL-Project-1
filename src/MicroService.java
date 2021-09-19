@@ -48,8 +48,6 @@ public abstract class MicroService implements Runnable {
         callMap=new ConcurrentHashMap();
     }
 
-
-
     /**
      * Subscribes to events of type {@code type} with the callback
      * {@code callback}. This means two things:
@@ -159,8 +157,6 @@ public abstract class MicroService implements Runnable {
     protected final void terminate() {
         terminated=true;
     }
-
-
 
     /**
      * @return the name of the service - the service name is given to it in the
